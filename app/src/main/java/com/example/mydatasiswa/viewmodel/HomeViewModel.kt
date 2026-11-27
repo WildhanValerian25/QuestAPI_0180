@@ -1,5 +1,6 @@
 package com.example.mydatasiswa.viewmodel
 
+import android.util.Log
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -31,10 +32,13 @@ class HomeViewModel(private val repositoryDataSiswa: RepositoryDataSiswa): ViewM
             listSiswa = try {
                 StatusUiSiswa.Success(repositoryDataSiswa.getDataSiswa())
             } catch (e:IOException){
+                Log.e("API_SISWA", "IOException: ${e.message}", e)
                 StatusUiSiswa.Error
             } catch (e:HttpException){
+                Log.e("API_SISWA", "HttpException: ${e.message}", e)
                 StatusUiSiswa.Error
             }  catch (e: Exception) {
+                Log.e("API_SISWA", "Exception: ${e.message}", e)
                 StatusUiSiswa.Error
             }
         }
